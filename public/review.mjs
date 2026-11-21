@@ -192,13 +192,14 @@ async function connectFirebase() {
     const { connect } = await import('./firebase.mjs');
     const session = await connect(await config.json(), loopback);
     uid = session.uid;
-    if (loopback) {
-      label.textContent = 'Anonymous Firebase session active. This run does not verify production App Check.';
+    if (!session.attest) {
+      label.textContent = 'Anonymous Firebase session active. App Check is inactive on loopback.';
     } else {
       label.textContent = 'Anonymous Firebase session active. Verifying App Check…';
       try {
         await session.attest();
-        label.textContent = 'Anonymous Firebase session and App Check attestation active.';
+        label.textContent = loopback ? 'Anonymous Firebase session and debug App Check attestation active.'
+          : 'Anonymous Firebase session and App Check attestation active.';
       } catch {
         label.textContent = 'Anonymous Firebase session active. App Check attestation failed.';
       }

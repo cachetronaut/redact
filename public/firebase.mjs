@@ -10,8 +10,11 @@ export async function connect({ firebase, appCheckSiteKey }, loopback) {
   if (!firebase?.appId || !firebase.projectId || !firebase.apiKey || (!loopback && !appCheckSiteKey)) {
     throw new Error('Firebase configuration incomplete');
   }
+  const debugToken = globalThis.FIREBASE_APPCHECK_DEBUG_TOKEN;
+  if (!loopback && debugToken) throw new Error('Debug App Check requires loopback');
+  const useAppCheck = appCheckSiteKey && (!loopback || (typeof debugToken === 'string' && debugToken));
   const app = initializeApp(firebase);
-  const appCheck = appCheckSiteKey ? initializeAppCheck(app, {
+  const appCheck = useAppCheck ? initializeAppCheck(app, {
     provider: new ReCaptchaEnterpriseProvider(appCheckSiteKey),
     isTokenAutoRefreshEnabled: true,
   }) : null;
