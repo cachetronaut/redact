@@ -1,0 +1,84 @@
+:root {
+  color-scheme: light;
+  font-family: "Avenir Next", Avenir, sans-serif;
+  color: #202824;
+  background: #f2f2e8;
+  --line: #c5cec0;
+  --ink: #16291f;
+  --fern: #b9e798;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+header, main { width: min(1220px, 100% - 3rem); margin-inline: auto; }
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: .85rem;
+}
+.wordmark { color: var(--ink); text-decoration: none; font-weight: 750; font-size: 1.35rem; }
+.wordmark span { margin-inline-start: .35rem; color: #47793c; font-size: .7em; }
+main { padding: clamp(2rem, 5vw, 4.8rem) 0 3rem; }
+h1 {
+  margin: 0;
+  font: 500 clamp(2.8rem, 6.5vw, 5rem)/.99 Georgia, serif;
+  letter-spacing: -.065em;
+}
+.intro { font-size: 1.1rem; margin: 1rem 0 2rem; }
+.workspace { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.panel {
+  min-width: 0;
+  background: #fcfcf6;
+  border: 1px solid var(--line);
+  padding: clamp(1rem, 2vw, 1.6rem);
+}
+.section-head, .actions { display: flex; align-items: center; gap: .65rem; flex-wrap: wrap; }
+.section-head { justify-content: space-between; min-height: 2.5rem; margin-bottom: .85rem; }
+h2 { margin: 0; font-size: 1rem; font-weight: 700; }
+#counts, #input-help, #firebase-status { color: #485747; font-size: .78rem; }
+textarea, pre {
+  display: block;
+  margin: 0;
+  padding: 1rem;
+  width: 100%;
+  height: 20rem;
+  font: .9rem/1.55 ui-monospace, Menlo, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow: auto;
+  border: 1px solid var(--line);
+}
+textarea { resize: vertical; background: #f7f8f1; color: var(--ink); }
+pre { background: var(--ink); color: #eef5e6; }
+mark {
+  background: var(--fern);
+  color: var(--ink);
+  border-radius: .2rem;
+  box-decoration-break: clone;
+  padding: .1em .22em;
+}
+button {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: white;
+  padding: .6rem .8rem;
+  font: inherit;
+  font-size: .85rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+button.secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+button:disabled { opacity: .48; cursor: default; }
+button:focus-visible, textarea:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid #385f2d;
+  outline-offset: 3px;
+}
+.panel p, #empty-label, #status { font-size: .9rem; line-height: 1.55; }
+#empty-label { display: block; margin-bottom: .85rem; }
+@media (max-width: 760px) {
+  .workspace { grid-template-columns: 1fr; }
+  textarea, pre { height: 16rem; }
+}

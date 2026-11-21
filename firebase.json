@@ -1,0 +1,18 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": ["**/.*"],
+    "headers": [{
+      "source": "**",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "no-referrer" }
+      ]
+    }, {
+      "source": "/detect.html",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "connect-src 'none'; frame-ancestors 'self'; form-action 'none'" }
+      ]
+    }]
+  }
+}

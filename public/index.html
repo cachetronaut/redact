@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Redact</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"integrity":{"https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js":"sha384-lx2pK6itftm2b4DO5vUB6/vcxeY6wNtNQMnd1KFm+hkb49Twfl4CLulMaAUrQArt","https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js":"sha384-qIt9wBDj9sX7ncuwuRbdqmFsQIPmTlHd1ZFFF4g/5d5BUH4ppRqv8X0/bgHwudAI","https://www.gstatic.com/firebasejs/13.4.0/firebase-app-check.js":"sha384-LQx/L0L53Ebx/r7YD3VIwCBlwJ/C/ZKX4KB+qf8oclFxr5aA59ADgFzDEunmVTeL"}}</script>
+  <script type="module" src="./review.mjs"></script>
+</head>
+<body>
+  <header><a class="wordmark" href="./">Redact<span aria-hidden="true">■</span></a><span>Cachetronaut</span></header>
+  <main>
+    <h1>Review before you share.</h1>
+    <p class="intro">Find sensitive text on this device, then decide what cloud AI can see.</p>
+    <div class="workspace">
+      <section class="panel" aria-labelledby="source-title">
+        <div class="section-head">
+          <h2 id="source-title"><label for="source">Source document</label></h2>
+          <button id="sample" class="secondary" type="button">Load 1040 sample</button>
+        </div>
+        <textarea id="source" spellcheck="false" autocomplete="off" autocapitalize="off"
+          maxlength="6000" placeholder="Paste plain text here" aria-describedby="input-help"></textarea>
+        <p id="input-help">Plain text only, up to 6,000 characters. PDFs and images are unsupported.</p>
+        <div class="actions">
+          <button id="detect" type="button" disabled>Detect on this device</button>
+          <button id="manual" class="secondary" type="button" disabled>Redact selection</button>
+        </div>
+      </section>
+      <section class="panel" aria-labelledby="review-title">
+        <div class="section-head">
+          <h2 id="review-title">Redacted payload</h2>
+          <span id="counts" aria-live="polite"></span>
+        </div>
+        <pre id="payload">Run detection to review the redacted text.</pre>
+        <p>Identified and user-selected spans are replaced locally. The mapping stays on this device. Detection can miss identifiers. Cloud AI receives the document content you approve.</p>
+        <label id="empty-label" hidden><input id="empty" type="checkbox"> No identifiers detected. I reviewed the text and approve it as shown.</label>
+        <button id="approve" type="button" disabled>Approve and save mapping locally</button>
+      </section>
+    </div>
+    <p id="status" role="status">Loading on-device detection via Firebase AI Logic…</p>
+    <p id="firebase-status" role="status"></p>
+    <iframe id="detector" title="Network-disabled on-device detection" src="./detect.html" hidden></iframe>
+  </main>
+</body>
+</html>
